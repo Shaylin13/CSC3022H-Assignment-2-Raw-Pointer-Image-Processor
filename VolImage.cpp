@@ -59,10 +59,6 @@ namespace PDYSHA009 {
 		VolImage::height = atoi(tokens[1].c_str());
 
 		numberOfImages = atoi(tokens.back().c_str());
-		
-		/*cout << "width: " <<VolImage::width << endl;
-		cout << "height: " <<VolImage::height << endl;
-		cout << "Number of images: " <<numberOfImages << endl;*/
 
 		VolImage::slices.resize(numberOfImages);//not neccesary just for assurance, if not used use push_back instead of slices[i]
 
@@ -71,7 +67,7 @@ namespace PDYSHA009 {
 			baseName = "brain_mri_raws";
 			string rawFileName = "MRI";
 			rawFileName = rawFileName + to_string(i) + ".raw";
-			//cout << rawFileName << endl;//testing purposes
+
             string rawtemp = baseName + "/" + rawFileName;
 
 			ifstream in;
@@ -85,7 +81,6 @@ namespace PDYSHA009 {
 			    for(int k =0; k < VolImage::width; k++)
 			    {
 			        rows[j][k] = (unsigned char)(in.get());
-			        //cout << (int)rows[j][k] << endl;//testing purposes
 			    }
 			}
 			//end of array population------------------------------------------
