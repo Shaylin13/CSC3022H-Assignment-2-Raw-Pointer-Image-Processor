@@ -19,3 +19,10 @@ clean:
 	rm -f *.o volimage
 	rm -f *.dat
 	rm -f *.raw
+
+tidy:
+	rm -f *.dat
+	rm -f *.raw
+	
+	
+
