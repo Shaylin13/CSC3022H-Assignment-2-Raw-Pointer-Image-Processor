@@ -44,7 +44,8 @@ namespace PDYSHA009 {
 		int numberOfImages;
 		vector<string> tokens;
 		string word;
-		string fileName = baseName + "/MRI.data";
+
+		string fileName =  "raws/"+baseName+".data";
 		ifstream file(fileName);
 
 		if (!file) {
@@ -64,11 +65,11 @@ namespace PDYSHA009 {
 
 		for (int i = 0; i < numberOfImages; i++) //loop repeats for each slice
 		{
-			baseName = "brain_mri_raws";
-			string rawFileName = "MRI";
+
+			string rawFileName = baseName;//"MRI";
 			rawFileName = rawFileName + to_string(i) + ".raw";
 
-            string rawtemp = baseName + "/" + rawFileName;
+            string rawtemp = /*baseName*/ + "raws/" + rawFileName;
 
 			ifstream in;
 			in.open(rawtemp, ios::binary);
