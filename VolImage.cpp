@@ -53,7 +53,6 @@ namespace PDYSHA009 {
 
 		while (getline(file, word, ' ')) {
 			tokens.push_back(word);
-			//cout << tokens.back().c_str()<<endl;
 		}
 
 		VolImage::width = atoi(tokens[0].c_str());
@@ -61,9 +60,9 @@ namespace PDYSHA009 {
 
 		numberOfImages = atoi(tokens.back().c_str());
 		
-		cout << "width: " <<VolImage::width << endl;
+		/*cout << "width: " <<VolImage::width << endl;
 		cout << "height: " <<VolImage::height << endl;
-		cout << "Number of images: " <<numberOfImages << endl;
+		cout << "Number of images: " <<numberOfImages << endl;*/
 
 		VolImage::slices.resize(numberOfImages);//not neccesary just for assurance, if not used use push_back instead of slices[i]
 
@@ -93,6 +92,12 @@ namespace PDYSHA009 {
 			VolImage::slices[i]=rows;//add 2D array to the vector, slices
 			
 		}
+		//Print Number of images and bytes needed as required
+		cout << "\nNumber of images: " <<numberOfImages << endl;
+		//(below) 4 bytes for each array as they are "pointer" and 1 byte for each char.
+		int amountBytes = numberOfImages*((VolImage::height*VolImage::width)+(VolImage::height*4)+4);
+		cout << "Bytes needed: " << amountBytes << "\n" <<endl;
+		
 		return true;
 	}
 	
@@ -190,6 +195,7 @@ int main(int argc, char* argv[]) {
 	    string outputName = argv[4];
 	    vol1.VolImage::extract(par1,outputName);
 	}
+	
 
 	return 0;
 }
