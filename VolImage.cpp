@@ -67,8 +67,8 @@ namespace PDYSHA009 {
 
 		VolImage::slices.resize(numberOfImages);//not neccesary just for assurance, if not used use push_back instead of slices[i]
 
-		for (int i = 0; i < numberOfImages; i++) 
-		{//repeats for each slice
+		for (int i = 0; i < numberOfImages; i++) //loop repeats for each slice
+		{
 			baseName = "brain_mri_raws";
 			string rawFileName = "MRI";
 			rawFileName = rawFileName + to_string(i) + ".raw";
@@ -92,18 +92,6 @@ namespace PDYSHA009 {
 			//end of array population------------------------------------------
 			VolImage::slices[i]=rows;//add 2D array to the vector, slices
 			
-			/*if(i ==(numberOfImages-1))//testing purposes
-			{
-			    for(int j = 0; j<VolImage::height;j++)//testing
-			    {
-			    for(int k =0; k<VolImage::width;k++)
-			    {
-			        cout<<VolImage::slices[122][j][k]<<endl;
-			    }
-			    }
-			}*/
-			
-			
 		}
 		return true;
 	}
@@ -126,14 +114,18 @@ namespace PDYSHA009 {
 			        out << rows[j][k];//write to file while populating array
 
 			    }
-			    /*if(j!=VolImage::height-1)
-			    {
-			        out<<endl;
-			    }*/
+			    
 			}
-			
-			out.close();
+			out.close();//close to prevent memory leaks
 			cout << (string)output_prefix<<".raw created"<<endl;
+			
+			//although not neccessary to create an array it was good for practice
+			//cleaning up memory to prevent leaks
+			for(int i=0;i<VolImage::height;i++)
+			{
+                delete [] rows[i];
+            }
+            delete [] rows;
 	}
 
 	
@@ -155,13 +147,10 @@ namespace PDYSHA009 {
 			    {
 			        out<<VolImage::slices[sliceId][j][k];
 			    }
-			    /*if(j!=VolImage::height-1)
-			    {
-			        out<<endl;
-			    }*/
 		}
 		out.close();//close to prevent memory leaks
 		cout << (string)output_prefix<<".raw created"<<endl;
+		
 	}
 
 	// number of bytes used to store image data bytes
@@ -178,10 +167,6 @@ namespace PDYSHA009 {
 
 int main(int argc, char* argv[]) {
 
-	//cout << argc << endl;//testing
-	//cout << argv[0] << endl;
-	//cout << argv[1] << endl;
-
 	string baseName = argv[1];
 
 	VolImage vol1;
@@ -195,9 +180,7 @@ int main(int argc, char* argv[]) {
 	    int par1 = atoi(argv[3]);
 	    int par2 = atoi(argv[4]);
 	    string outputName = argv[5];
-	    //cout << par1 <<endl;//for testing
-	    //cout << par2 <<endl;
-	    //cout << outputName <<endl;
+	   
 	    vol1.VolImage::diffmap(par1,par2,outputName);
 	}
 	//if parameters for extract are entered
