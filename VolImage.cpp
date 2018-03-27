@@ -94,9 +94,8 @@ namespace PDYSHA009 {
 		}
 		//Print Number of images and bytes needed as required
 		cout << "\nNumber of images: " <<numberOfImages << endl;
-		//(below) 4 bytes for each array as they are "pointer" and 1 byte for each char.
-		int amountBytes = numberOfImages*((VolImage::height*VolImage::width)+(VolImage::height*4)+4);
-		cout << "Bytes needed: " << amountBytes << "\n" <<endl;
+		
+		cout << "Bytes needed: " << VolImage::volImageSize()*numberOfImages << "\n" <<endl;
 		
 		return true;
 	}
@@ -161,7 +160,9 @@ namespace PDYSHA009 {
 	// number of bytes used to store image data bytes
 	// and pointers (ignore vector<> container, dims etc)
 	int VolImage::volImageSize(void) {
-		return 0;
+	    //(below) 4 bytes for each array as they are "pointer" and 1 byte for each char.
+		int amountBytes = ((VolImage::height*VolImage::width)+(VolImage::height*4)+4);
+		return amountBytes;
 	}
 
 	int VolImage::getWidth() {
