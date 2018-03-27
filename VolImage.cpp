@@ -27,7 +27,15 @@ namespace PDYSHA009 {
 	// destructor
 	VolImage::~VolImage() 
 	{
-
+	    for(int i=0; i< VolImage::slices.size();i++)
+	    {
+            for(int j =0; j<VolImage::height;j++)
+            {
+                delete [] VolImage::slices[i][j];//delete the inner arrays
+            }
+            delete [] VolImage::slices[i];//delete the "rows" outer arrays
+        }
+       
 	}
 
 	// populate the object with images in stack and
